@@ -1,6 +1,7 @@
-import getNoOfIncreases from './getNoOfIncreases';
+import getNoOfIncreases, { getNoOfSlidingIncreases } from './getNoOfIncreases';
 import depths from './data';
 
-const day1Answer = getNoOfIncreases(depths);
+const part1Answer = getNoOfIncreases(depths);
+const part2Answer = getNoOfSlidingIncreases(depths);
 
-export default day1Answer;
+export default {part1Answer, part2Answer};
