@@ -18,4 +18,9 @@ const testData = `7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,1
 22 11 13  6  5
  2  0 12  3  7`;
 
+export const testDataShort = `1,2
+
+ 1  2
+ 3  4`;
+
 export default testData;

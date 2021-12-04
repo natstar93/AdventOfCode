@@ -6,4 +6,4 @@ import day4 from './4/index';
 console.log(`Day 1: ${day1.part1Answer}, ${day1.part2Answer}`);
 console.log(`Day 2: ${day2.part1Answer}, ${day2.part2Answer}`);
 console.log(`Day 3: ${day3.part1Answer}, ${day3.part2Answer}`);
-console.log(`Day 4: ${day4.part1Answer}`);
+console.log(`Day 4: ${day4.part1Answer}, ${day4.part2Answer}`);
