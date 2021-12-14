@@ -54,6 +54,6 @@ test('getTotalFlashes gets total flashes after n steps', () => {
   expect(getTotalFlashes(100, testData)).toEqual(1656);
 });
 
-test.only('getSimultaneouslyFlashingStep gets step no of first simultaneous flash', () => {
+test('getSimultaneouslyFlashingStep gets step no of first simultaneous flash', () => {
   expect(getSimultaneouslyFlashingStep(testData)).toEqual(195);
 });

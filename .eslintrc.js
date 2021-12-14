@@ -13,7 +13,8 @@ module.exports = {
   rules: {
     semi: ['error', 'always'],
     quotes: ['error', 'single'],
-    'max-len': ['error', { code: 80 }],
+    'max-len': ['warning', { code: 80 }],
     'arrow-parens': ['error', 'as-needed'],
+    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
   },
 };

@@ -9,6 +9,7 @@
 // import day9 from './9/index';
 import day10 from './10/index';
 import day11 from './11/index';
+import day12 from './12/index';
 
 // console.log(`Day 1: ${day1.part1Answer}, ${day1.part2Answer}`);
 // console.log(`Day 2: ${day2.part1Answer}, ${day2.part2Answer}`);
@@ -21,3 +22,4 @@ import day11 from './11/index';
 // console.log(`Day 9: ${day9.part1Answer}, ${day9.part2Answer}`);
 console.log(`Day 10: ${day10.part1Answer}, ${day10.part2Answer}`);
 console.log(`Day 11: ${day11.part1Answer}, ${day11.part2Answer}`);
+console.log(`Day 12: ${day12.part1Answer}, ${day12.part2Answer}`);

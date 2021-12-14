@@ -87,7 +87,6 @@ export const getGridAfterOneStep = inputGrid => {
         }
       }
     }
-
     hasFinished = hasFinishedMap
       .every(row => row.every(_item => _item === true));
   }
