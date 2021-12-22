@@ -4,6 +4,7 @@ module.exports = {
     es2021: true,
   },
   extends: [
+    'eslint:recommended',
     'airbnb-base',
   ],
   parserOptions: {
@@ -13,8 +14,8 @@ module.exports = {
   rules: {
     semi: ['error', 'always'],
     quotes: ['error', 'single'],
-    'max-len': ['warning', { code: 80 }],
     'arrow-parens': ['error', 'as-needed'],
+    'max-len': ['error', { code: 80, ignoreComments: true }],
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
   },
 };
