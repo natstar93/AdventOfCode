@@ -35,12 +35,12 @@ export const getLargeGrid = riskLevels => {
     }),
   );
 
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < 9; i += 1) {
     const gridI = i < 1 ? riskLevels : getGridIncremented(riskLevels, i);
     const maxRow = Math.min(i + 1, 5);
     const minRow = Math.max(i - 4, 0);
-    for (let j = minRow; j < maxRow; j++) {
-      for (let k = 0; k < gridI.length; k++) {
+    for (let j = minRow; j < maxRow; j += 1) {
+      for (let k = 0; k < gridI.length; k += 1) {
         largeGrid[k + j * gridI.length] = [
           ...(largeGrid[k + j * gridI.length] || []), ...gridI[k],
         ];
@@ -60,6 +60,7 @@ export const getDijkstrasPathMap = (
   const riskPathMap = getInfinityMap(riskLevels, startCoord);
   const destinationCoord = [riskLevels.length - 1, riskLevels[0].length - 1];
   let currentNode = startCoord;
+  let unvisitedNeighbours = [];
 
   for (let i = 0; i < unvisitedCount; i += 1) {
     const [y, x] = currentNode;
@@ -70,13 +71,16 @@ export const getDijkstrasPathMap = (
     }
 
     const neighbours = [[y, x + 1], [y, x - 1], [y + 1, x], [y - 1, x]]
-      .map(([yCoord, xCoord]) => ({
-        tentativeDistance: riskLevels[yCoord]
+      .reduce((acc, [yCoord, xCoord]) => {
+        if (yCoord < 0 || xCoord < 0) return acc;
+        return [...acc, {
+          tentativeDistance: riskLevels[yCoord]
           && riskLevels[yCoord][xCoord] + risk,
-        currentDistance: riskPathMap[yCoord] && riskPathMap[yCoord][xCoord],
-        yCoord,
-        xCoord,
-      }));
+          currentDistance: riskPathMap[yCoord] && riskPathMap[yCoord][xCoord],
+          yCoord,
+          xCoord,
+        }];
+      }, []);
 
     for (let j = 0; j < neighbours.length; j += 1) {
       const neighbour = neighbours[j];
@@ -85,18 +89,26 @@ export const getDijkstrasPathMap = (
       ) {
         riskPathMap[yCoord][xCoord] = neighbour.tentativeDistance;
       }
+      if (unvisitedSet[yCoord.toString()]
+        && unvisitedSet[yCoord.toString()].indexOf(xCoord) > -1
+      ) {
+        unvisitedNeighbours.push([yCoord, xCoord]);
+      }
     }
 
     unvisitedSet[y.toString()] = unvisitedSet[y.toString()]
       .filter(xCoord => xCoord !== x);
 
-    const nextNode = Object.keys(unvisitedSet).reduce((
+    unvisitedNeighbours = unvisitedNeighbours.filter(
+      item => !(item[0] === y && item[1] === x),
+    );
+
+    const nextNode = unvisitedNeighbours.reduce((
       acc,
-      key,
-    ) => unvisitedSet[key].reduce((rowAcc, item) => (
-      riskPathMap[parseInt(key, 10)][item] < riskPathMap[rowAcc[0]][rowAcc[1]]
-        ? [parseInt(key, 10), item]
-        : rowAcc), acc), destinationCoord);
+      coord,
+    ) => (riskPathMap[coord[0]][coord[1]] < riskPathMap[acc[0]][acc[1]]
+      ? coord
+      : acc), destinationCoord);
 
     currentNode = nextNode;
   }
